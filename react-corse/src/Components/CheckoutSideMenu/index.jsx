@@ -14,16 +14,18 @@ const CheckoutSideMenu = () => {
         context.setCartProducts(filteredProducts)
     }
     const handleCheckout = () => {
+        const date = new Date();
         const orderToAdd = {
-            date: '01.02.2023',
+            date: date.toLocaleDateString(),
             products: context.cartProducts,
-            totalProducts: context.cartProducts.lenght,
+            totalProducts: context.cartProducts.length,
             totalPrice: totalPrice(context.cartProducts),
         };
 
         context.setOrder([...context.order, orderToAdd]);
         context.setCartProducts([]);
         context.setCount(0);
+        context.closeCheckoutSideMenu()
     }
     return (
         <aside className={`${context.isCheckoutSideMenu ? 'flex' : 'hidden'} checkout-side-menu   flex-col fixed right-0 border bg-white border-black rounded-lg `}>
